@@ -1,0 +1,29 @@
+GET http://localhost:5000/users
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOjEsIm5hbWUiOiJSYW5nZ2EiLCJlbWFpbCI6ImR3aXJhbmdnYW9rdGF6QGdtYWlsLmNvbSIsImlhdCI6MTcwODU0NzYwNiwiZXhwIjoxNzA4NTQ3NjE2fQ.2C3NEekCrfD_tOr8dLIAu4pud7QSGPrfARlQ3reUecs
+
+
+###
+POST http://localhost:5000/users
+Content-Type: application/json
+
+{
+    "name": "Rangga",
+    "email": "dwiranggaoktaz@gmail.com",
+    "password": "Rangga123",
+    "confirmPassword": "Rangga123"
+}
+
+###
+POST http://localhost:5000/login
+Content-Type: application/json
+
+{
+    "email": "dwiranggaoktaz@gmail.com",
+    "password": "Rangga123"
+}
+
+###
+GET http://localhost:5000/token
+
+###
+DELETE http://localhost:5000/logout
