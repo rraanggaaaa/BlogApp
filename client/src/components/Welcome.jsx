@@ -1,24 +1,13 @@
 import React, { Fragment, useState, useEffect } from 'react';
-import axios from "axios";
-import { jwtDecode } from "jwt-decode";
-import { useNavigate } from 'react-router-dom';
-import WebFont from 'webfontloader';
 import { Disclosure, Menu, Transition } from '@headlessui/react'
 import { Bars3Icon, XMarkIcon } from '@heroicons/react/24/outline'
 import Maps from './pages/maps/Maps';
-import { PhotoIcon, UserCircleIcon } from '@heroicons/react/24/solid'
+import Footer from './pages/footer/Footer'
 
 const navigation = [
     { name: 'Home', href: '/Home', current: false },
     { name: 'Blog', href: '/Blog', current: false },
     { name: 'About', href: '/About', current: false },
-]
-
-const navigationfooter = [
-    { name: 'Home', href: '/Home', current: false },
-    { name: 'Blog', href: '/Blog', current: false },
-    { name: 'About', href: '/About', current: false },
-    { name: 'Contact Us', href: '/contact', current: false },
 ]
 
 const links = [
@@ -29,54 +18,6 @@ const links = [
 ]
 
 const Welcome = () => {
-    const [name, setName] = useState('');
-    const [token, setToken] = useState('');
-    const [expire, setExpire] = useState('');
-    const navigate = useNavigate();
-
-    useEffect(() => {
-        refreshToken();
-        WebFont.load({
-            google: {
-                families: ['sans-serif', 'Poppins']
-            }
-        });
-    }, []);
-
-    const refreshToken = async () => {
-        try {
-            const response = await axios.get('http://localhost:5000/token');
-            setToken(response.data.accessToken);
-            const decoded = jwtDecode(response.data.accessToken);
-            setName(decoded.name);
-            setExpire(decoded.exp);
-        } catch (error) {
-            if (error.response) {
-                navigate('/');
-            }
-        }
-    };
-
-    const axiosJWT = axios.create();
-
-    axiosJWT.interceptors.request.use(async (config) => {
-        const currentDate = new Date();
-        if (expire * 1000 < currentDate.getTime()) {
-            const response = await axios.get('http://localhost:5000/token');
-            config.headers.Authorization = `Bearer ${response.data.accessToken}`;
-            setToken(response.data.accessToken);
-            const decoded = jwtDecode(response.data.accessToken);
-            setName(decoded.name);
-            setExpire(decoded.exp);
-        }
-        return config;
-    }, (error) => {
-        return Promise.reject(error);
-    });
-
-    function classNames(...classes) {
-        return classes.filter(Boolean).join(' ')
-    }
 
     return (
 
@@ -114,10 +55,9 @@ const Welcome = () => {
                                                     <a
                                                         key={item.name}
                                                         href={item.href}
-                                                        className={classNames(
-                                                            item.current ? 'bg-gray-700 text-white' : 'text-gray-300 hover:bg-gray-700 hover:text-white',
-                                                            'rounded-md px-3 py-2 text-xl font-medium'
-                                                        )}
+                                                        className="
+                                                        text-gray-300 hover:bg-gray-700 hover:text-white rounded-md px-3 py-2 text-xl font-medium"
+
                                                         aria-current={item.current ? 'page' : undefined}
                                                     >
                                                         {item.name}
@@ -146,28 +86,6 @@ const Welcome = () => {
                                                 leaveFrom="transform opacity-100 scale-100"
                                                 leaveTo="transform opacity-0 scale-95"
                                             >
-                                                <Menu.Items className="absolute right-0 z-10 mt-2 w-48 origin-top-right rounded-md bg-white py-1 shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none">
-                                                    <Menu.Item>
-                                                        {({ active }) => (
-                                                            <a
-                                                                href="/Profile"
-                                                                className={classNames(active ? 'bg-gray-100' : '', 'block px-4 py-2 text-sm text-gray-700')}
-                                                            >
-                                                                Your Profile
-                                                            </a>
-                                                        )}
-                                                    </Menu.Item>
-                                                    <Menu.Item>
-                                                        {({ active }) => (
-                                                            <a
-                                                                href="#"
-                                                                className={classNames(active ? 'bg-gray-100' : '', 'block px-4 py-2 text-sm text-gray-700')}
-                                                            >
-                                                                Settings
-                                                            </a>
-                                                        )}
-                                                    </Menu.Item>
-                                                </Menu.Items>
                                             </Transition>
                                         </Menu>
                                     </div>
@@ -179,7 +97,7 @@ const Welcome = () => {
             </header>
 
             <body class="h-full">
-                <div className="min-h-screen  isolate flex justify-center items-center overflow-hidden bg-slate-900 py-24 sm:py-32 rounded-b-3xl">
+                <div className="min-h-screen relative isolate flex justify-center items-center overflow-hidden bg-slate-900 py-24 sm:py-32 rounded-b-3xl">
                     <img
                         src="https://images.unsplash.com/photo-1521737604893-d14cc237f11d?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&crop=focalpoint&fp-y=.8&w=2830&h=1500&q=80&blend=111827&sat=-100&exp=15&blend-mode=multiply"
                         alt=""
@@ -331,21 +249,20 @@ const Welcome = () => {
                     </div>
                 </section>
 
-                <section className='flex mt-10 justify-center items-center'>
-                    <div className='justify-center items-center p-12 bg-blue-400 rounded-lg'>
+                <section className='flex mt-10 -mb-10 justify-center items-center'>
+                    <div className='justify-center w-full  items-center p-12 bg-blue-400 rounded-lg'>
                         <div className='flex justify-center items-center'>
-                            <h1 className='text-3xl font-sans font-semibold text-white'>
+                            <h1 className='justify-center text-3xl font-sans font-semibold text-white'>
                                 Join our team to be a part
                             </h1>
                         </div>
-                        <div className='flex justify-center items-center'>
-                            <h1 className='text-3xl font-sans font-semibold text-white'>
-                                of our story
-                            </h1>
-                        </div>
+
+                        <h1 className='flex justify-center text-3xl font-sans font-semibold text-white'>
+                            of our story
+                        </h1>
 
                         <div className="sm:col-span-3 mt-10">
-                            <label htmlFor="email" className="block ms-10 text-sm font-medium leading-6 text-white">
+                            <label htmlFor="email" className="flex justify-center mr-36 items-center text-sm font-medium leading-6 text-white">
                                 Email
                             </label>
                             <div className="flex mt-2 justify-center items-center">
@@ -378,37 +295,7 @@ const Welcome = () => {
 
                 </section>
 
-                <section className='min-h-screen m-10'>
-                    <div className='flex justify-center items-center'>
-                        <img
-                            className="h-8 w-auto"
-                            src="https://tailwindui.com/img/logos/mark.svg?color=indigo&shade=500"
-                            alt="Your Company"
-                        />
-                        <h1 className='text-white font-bold text-xl ml-6 font-mono'>BlogApp</h1>
-                    </div>
-
-                    <div className='flex justify-center items-center m-4'>
-                        <div className="flex flex-1 items-center justify-center sm:items-stretch sm:justify-center">
-                            <div className="flex space-x-5">
-                                {navigationfooter.map((item) => (
-                                    <a
-                                        key={item.name}
-                                        href={item.href}
-                                        className={classNames(
-                                            item.current ? 'bg-gray-700  text-white' : 'text-white hover:bg-gray-700 hover:text-white',
-                                            'rounded-md px-3 py-2 text-sm font-normal'
-                                        )}
-                                        aria-current={item.current ? 'page' : undefined}
-                                    >
-                                        {item.name}
-                                    </a>
-                                ))}
-                            </div>
-                        </div>
-
-                    </div>
-                </section>
+                <Footer />
             </body>
         </html>
     );
