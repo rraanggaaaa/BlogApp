@@ -14,6 +14,13 @@ const navigation = [
     { name: 'About', href: '/About', current: false },
 ]
 
+const navigationfooter = [
+    { name: 'Home', href: '/Home', current: false },
+    { name: 'Blog', href: '/Blog', current: false },
+    { name: 'About', href: '/About', current: false },
+    { name: 'Contact Us', href: '/contact', current: false },
+]
+
 const links = [
     { name: 'Open roles', href: '#' },
     { name: 'Internship program', href: '#' },
@@ -325,10 +332,17 @@ const Welcome = () => {
                 </section>
 
                 <section className='flex mt-10 justify-center items-center'>
-                    <div className='justify-center items-center px-60 py-12 bg-blue-400 rounded-lg'>
-                        <h1 className='text-3xl font-sans font-semibold text-white'>
-                            Join our team to be a part of our story
-                        </h1>
+                    <div className='justify-center items-center p-12 bg-blue-400 rounded-lg'>
+                        <div className='flex justify-center items-center'>
+                            <h1 className='text-3xl font-sans font-semibold text-white'>
+                                Join our team to be a part
+                            </h1>
+                        </div>
+                        <div className='flex justify-center items-center'>
+                            <h1 className='text-3xl font-sans font-semibold text-white'>
+                                of our story
+                            </h1>
+                        </div>
 
                         <div className="sm:col-span-3 mt-10">
                             <label htmlFor="email" className="block ms-10 text-sm font-medium leading-6 text-white">
@@ -350,7 +364,7 @@ const Welcome = () => {
                                 </button>
                             </div>
                             <div className='flex justify-center items-center'>
-                                <div className='mt-10items-center bg-blue-400'>
+                                <div className='mt-10 items-center bg-blue-400'>
                                     <h1 className='text-sm text-center font-sans text-white'>
                                         Thank you for participant !
                                     </h1>
@@ -362,6 +376,38 @@ const Welcome = () => {
                         </div>
                     </div>
 
+                </section>
+
+                <section className='min-h-screen m-10'>
+                    <div className='flex justify-center items-center'>
+                        <img
+                            className="h-8 w-auto"
+                            src="https://tailwindui.com/img/logos/mark.svg?color=indigo&shade=500"
+                            alt="Your Company"
+                        />
+                        <h1 className='text-white font-bold text-xl ml-6 font-mono'>BlogApp</h1>
+                    </div>
+
+                    <div className='flex justify-center items-center m-4'>
+                        <div className="flex flex-1 items-center justify-center sm:items-stretch sm:justify-center">
+                            <div className="flex space-x-5">
+                                {navigationfooter.map((item) => (
+                                    <a
+                                        key={item.name}
+                                        href={item.href}
+                                        className={classNames(
+                                            item.current ? 'bg-gray-700  text-white' : 'text-white hover:bg-gray-700 hover:text-white',
+                                            'rounded-md px-3 py-2 text-sm font-normal'
+                                        )}
+                                        aria-current={item.current ? 'page' : undefined}
+                                    >
+                                        {item.name}
+                                    </a>
+                                ))}
+                            </div>
+                        </div>
+
+                    </div>
                 </section>
             </body>
         </html>
