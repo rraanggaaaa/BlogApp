@@ -6,10 +6,10 @@ import {
   Register,
   Login,
   Logout,
-  getAllUsers, // Imported getAllUsers function
-  createUser, // Imported createUser function
-  updateUser, // Imported updateUser function
-  deleteUser, // Imported deleteUser function
+  getAllUsers, 
+  createUser,
+  updateUser, 
+  deleteUser,
 } from "../controller/userController.js";
 import { verifyToken } from "../middleware/verifyToken.js";
 import { refreshToken } from "../controller/refreshToken.js";
