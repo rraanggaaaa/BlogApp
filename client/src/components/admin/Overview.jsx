@@ -1,6 +1,5 @@
 import React from "react";
 import DefaultLayout from "../layout/DefaultLayout";
-import { Disclosure } from "@headlessui/react";
 import { Card, CardBody, Typography } from "@material-tailwind/react";
 
 const Overview = () => {

@@ -1,53 +1,41 @@
-// Articles.jsx
-import React from "react";
+import React, { useEffect, useState } from "react";
 import DefaultLayout from "../layout/DefaultLayout";
-import { Card, Typography, Button } from "@material-tailwind/react";
+import { Card, Typography } from "@material-tailwind/react";
+import Editor from "../context/main";
+import axios from "axios";
 
-const TABLE_HEAD = ["Name", "Job", "Employed", ""];
-
-const TABLE_ROWS = [
-  {
-    name: "John Michael",
-    judul: "Manager",
-    date: "23/04/18",
-  },
-  {
-    name: "Alexa Liras",
-    judul: "Developer",
-    date: "23/04/18",
-  },
-  {
-    name: "Laurent Perrier",
-    judul: "Executive",
-    date: "19/09/17",
-  },
-  {
-    name: "Michael Levi",
-    judul: "Developer",
-    date: "24/12/08",
-  },
-  {
-    name: "Richard Gran",
-    judul: "Manager",
-    date: "04/10/21",
-  },
-];
+const TABLE_HEAD = ["Title", "Author", "Content", "Created_At"];
 
 const Articles = () => {
+  const [articles, setArticles] = useState([]);
+
+  useEffect(() => {
+    const fetchData = async () => {
+      try {
+        const response = await axios.get("http://localhost:5000/blogs");
+        setArticles(response.data);
+      } catch (error) {
+        console.error("Error fetching articles:", error);
+      }
+    };
+
+    fetchData();
+  }, []);
+
   return (
     <DefaultLayout>
-      <div className="flex justify-between items-center mb-4">
-        <Typography>List Article</Typography>
-        <Button color="red">Tambah Articles</Button>
+      <Editor />
+      <div className="flex justify-between items-center mt-10 mb-4">
+        <h1 className="font-loader text-lg">List Article</h1>
       </div>
-      <Card className="h-full w-full overflow-scroll">
-        <table className="w-full min-w-max table-auto text-left">
+      <Card className="h-full  w-full rounded-lg  bg-slate-900">
+        <table className="table-auto text-left bg-slate-900 p-6 m-4 rounded-md">
           <thead>
             <tr>
               {TABLE_HEAD.map((head) => (
                 <th
                   key={head}
-                  className="border-b border-blue-gray-100 bg-blue-gray-50 p-4"
+                  className="text-white border-b border-blue-gray-100 bg-blue-gray-50 p-4"
                 >
                   <Typography
                     variant="small"
@@ -61,55 +49,43 @@ const Articles = () => {
             </tr>
           </thead>
           <tbody>
-            {TABLE_ROWS.map(({ name, judul, date }, index) => {
-              const isLast = index === TABLE_ROWS.length - 1;
-              const classes = isLast
-                ? "p-4"
-                : "p-4 border-b border-blue-gray-50";
+            {articles.map((article) => (
+              <tr key={article.id}>
+                <td className="p-4 border-b border-blue-gray-50 text-green-200">
+                  <Typography
+                    variant="small"
+                    color="blue-gray"
+                    className="font-normal"
+                  >
+                    {article.title}
+                  </Typography>
+                </td>
+                <td className="p-4 border-b border-blue-gray-50 text-green-200">
+                  <div
+                    dangerouslySetInnerHTML={{ __html: article.content }}
+                  />
+                </td>
 
-              return (
-                <tr key={name}>
-                  <td className={classes}>
-                    <Typography
-                      variant="small"
-                      color="blue-gray"
-                      className="font-normal"
-                    >
-                      {name}
-                    </Typography>
-                  </td>
-                  <td className={`${classes} bg-blue-gray-50/50`}>
-                    <Typography
-                      variant="small"
-                      color="blue-gray"
-                      className="font-normal"
-                    >
-                      {judul}
-                    </Typography>
-                  </td>
-                  <td className={classes}>
-                    <Typography
-                      variant="small"
-                      color="blue-gray"
-                      className="font-normal"
-                    >
-                      {date}
-                    </Typography>
-                  </td>
-                  <td className={`${classes} bg-blue-gray-50/50`}>
-                    <Typography
-                      as="a"
-                      href="#"
-                      variant="small"
-                      color="blue-gray"
-                      className="font-medium"
-                    >
-                      Edit
-                    </Typography>
-                  </td>
-                </tr>
-              );
-            })}
+                <td className="p-4 border-b border-blue-gray-50 text-green-200">
+                  <Typography
+                    variant="small"
+                    color="blue-gray"
+                    className="font-normal"
+                  >
+                    {article.author}
+                  </Typography>
+                </td>
+                <td className="p-4 border-b border-blue-gray-50 text-green-200">
+                  <Typography
+                    variant="small"
+                    color="blue-gray"
+                    className="font-normal"
+                  >
+                    {article.createdAt}
+                  </Typography>
+                </td>
+              </tr>
+            ))}
           </tbody>
         </table>
       </Card>

@@ -7,7 +7,8 @@ module.exports = {
     configure: (webpackConfig, { env, paths }) => {
       webpackConfig.resolve.fallback = {
         ...webpackConfig.resolve.fallback,
-        "timers": require.resolve("timers-browserify")
+        "timers": require.resolve("timers-browserify"),
+        "stream": require.resolve("stream-browserify")
       };
       return webpackConfig;
     },

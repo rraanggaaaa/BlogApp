@@ -7,12 +7,11 @@ import Navbar from "./components/pages/nav/Navbar.jsx";
 import NavbarAdmin from "./components/pages/nav/NavbarAdmin.jsx";
 import Profile from "./components/pages/Profile.jsx";
 import Home from "./components/users/Home";
+import Blog from "./components/users/Blog";
 import ChangePassword from "./components/pages/password/changePassword.jsx";
 import AdminDashboard from "./components/admin/Dashboard.jsx"; // Import the AdminDashboard component
 import AdminOverview from "./components/admin/Overview.jsx";
-import SidebarWithContentSeparator from "./components/pages/sidebar/sidebar.jsx";
 import Articles from "./components/admin/Articles.jsx";
-import Createarticles from "./components/admin/createarticles.jsx";
 
 function App() {
   return (
@@ -32,7 +31,34 @@ function App() {
           }
         />
         <Route
-          path="/profile"
+          path="/home/blog"
+          element={
+            <>
+              <Navbar />
+              <Blog />
+            </>
+          }
+        />
+        <Route
+          path="/blog"
+          element={
+            <>
+              <Navbar />
+              <Blog />
+            </>
+          }
+        />
+        <Route
+          path="/admin/profile"
+          element={
+            <>
+              <NavbarAdmin />
+              <Profile />
+            </>
+          }
+        />
+        <Route
+          path="/user/profile"
           element={
             <>
               <Navbar />
@@ -73,15 +99,6 @@ function App() {
             <>
               <NavbarAdmin />
               <Articles />
-            </>
-          }
-        />
-        <Route
-          path="/admin/articles/create"
-          element={
-            <>
-              <NavbarAdmin />
-              <Createarticles />
             </>
           }
         />

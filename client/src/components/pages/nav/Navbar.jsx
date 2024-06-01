@@ -7,13 +7,13 @@ import { Bars3Icon, XMarkIcon } from '@heroicons/react/24/outline'
 
 const navigation = [
     { name: 'Home', href: '/Home', current: false },
-    { name: 'Shop', href: '/Shop', current: false },
+    { name: 'Blog', href: '/Blog', current: false },
     { name: 'History', href: '/History', current: false },
     { name: 'About', href: '/About', current: false },
 ]
 const Navbar = () => {
-    const [name, setName] = useState('');
-    const [token, setToken] = useState('');
+    const [setName] = useState('');
+    const [setToken] = useState('');
     const [expire, setExpire] = useState('');
     const [image, setImage] = useState('');
     useEffect(() => {
@@ -24,20 +24,6 @@ const Navbar = () => {
 
     }, []);
 
-
-    const refreshToken = async () => {
-        try {
-            const response = await axios.get('http://localhost:5000/token');
-            setToken(response.data.accessToken);
-            const decoded = jwtDecode(response.data.accessToken);
-            setName(decoded.name);
-            setExpire(decoded.exp);
-        } catch (error) {
-            if (error.response) {
-                navigate('/');
-            }
-        }
-    };
 
     const axiosJWT = axios.create();
 
@@ -67,15 +53,6 @@ const Navbar = () => {
             console.log(error);
         }
     }
-
-    const getUser = async () => {
-        const response = await axiosJWT.get('http://localhost:5000/users', {
-            headers: {
-                Authorization: `Bearer ${token}`
-            }
-        });
-        console.log(response.data);
-    };
 
     function classNames(...classes) {
         return classes.filter(Boolean).join(' ')
@@ -147,30 +124,13 @@ const Navbar = () => {
                                             <Menu.Item>
                                                 {({ active }) => (
                                                     <a
-                                                        href="/Profile"
-                                                        className={classNames(active ? 'bg-gray-100' : '', 'block px-4 py-2 text-sm text-gray-700')}
-                                                    >
-                                                        Your Profile
-                                                    </a>
-                                                )}
-                                            </Menu.Item>
-                                            <Menu.Item>
-                                                {({ active }) => (
-                                                    <a
-                                                        href="#"
-                                                        className={classNames(active ? 'bg-gray-100' : '', 'block px-4 py-2 text-sm text-gray-700')}
-                                                    >
-                                                        Settings
-                                                    </a>
-                                                )}
-                                            </Menu.Item>
-                                            <Menu.Item>
-                                                {({ active }) => (
-                                                    <a
-                                                        onClick={getUser}
-                                                        className={classNames(active ? 'bg-gray-100' : '', 'block px-4 py-2 text-sm text-gray-700')}
-                                                    >
-                                                        Refresh Token
+
+                                                        href="/user/Profile"
+                                                        className={classNames(
+                                                            active ? "bg-gray-100" : "",
+                                                            "block px-4 py-2 text-sm text-white bg-slate-600 rounded-md m-2"
+                                                        )}>
+                                                        Your Profile & Setting
                                                     </a>
                                                 )}
                                             </Menu.Item>
