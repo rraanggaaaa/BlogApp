@@ -9,6 +9,10 @@ import Profile from "./components/pages/Profile.jsx";
 import Home from "./components/users/Home";
 import ChangePassword from "./components/pages/password/changePassword.jsx";
 import AdminDashboard from "./components/admin/Dashboard.jsx"; // Import the AdminDashboard component
+import AdminOverview from "./components/admin/Overview.jsx";
+import SidebarWithContentSeparator from "./components/pages/sidebar/sidebar.jsx";
+import Articles from "./components/admin/Articles.jsx";
+import Createarticles from "./components/admin/createarticles.jsx";
 
 function App() {
   return (
@@ -51,6 +55,33 @@ function App() {
             <>
               <NavbarAdmin />
               <AdminDashboard />
+            </>
+          }
+        />
+        <Route
+          path="/admin/overview"
+          element={
+            <>
+              <NavbarAdmin />
+              <AdminOverview />
+            </>
+          }
+        />
+        <Route
+          path="/admin/articles"
+          element={
+            <>
+              <NavbarAdmin />
+              <Articles />
+            </>
+          }
+        />
+        <Route
+          path="/admin/articles/create"
+          element={
+            <>
+              <NavbarAdmin />
+              <Createarticles />
             </>
           }
         />
