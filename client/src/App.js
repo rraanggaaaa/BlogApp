@@ -13,6 +13,7 @@ import AdminDashboard from "./components/admin/Dashboard.jsx"; // Import the Adm
 import AdminOverview from "./components/admin/Overview.jsx";
 import Articles from "./components/admin/Articles.jsx";
 import BlogWelcome from "./components/BlogWelcome.jsx";
+import About from "./components/About.jsx";
 
 function App() {
   return (
@@ -47,6 +48,14 @@ function App() {
             <>
               <Navbar />
               <Blog />
+            </>
+          }
+        />
+        <Route
+          path="/about"
+          element={
+            <>
+              <About />
             </>
           }
         />

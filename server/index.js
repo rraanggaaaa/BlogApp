@@ -17,7 +17,6 @@ async function initializeDatabase() {
         await db.authenticate();
         console.log("Database connected.");
         
-        // Sync models
         await Users.sync();
         await Blogs.sync();
 
@@ -28,13 +27,10 @@ async function initializeDatabase() {
 
 initializeDatabase();
 
-// Configure body-parser to handle larger request bodies
-app.use(bodyParser.json({ limit: '10mb' })); // Adjust the limit as per your requirement
-
+app.use(bodyParser.json({ limit: '10mb' })); 
 app.use(cors({ credentials:true, origin:'http://localhost:3000'}))
 app.use(cookieParser());
-// Remove the line below since bodyParser.json() is already handling JSON request bodies
-// app.use(express.json());
+app.use(express.json());
 app.use(router);
 
 app.listen(PORT, (error) =>{ 

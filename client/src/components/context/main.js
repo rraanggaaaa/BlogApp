@@ -8,7 +8,6 @@ const Editor = () => {
   const [title, setTitle] = useState("");
   const [author, setAuthor] = useState("");
   const [content, setContent] = useState("");
-
   const quill = useRef();
 
   const handleSubmit = async () => {
@@ -33,28 +32,21 @@ const Editor = () => {
     input.setAttribute("type", "file");
     input.setAttribute("accept", "image/*");
     input.click();
-  
+
     input.onchange = () => {
       const file = input.files[0];
+      if (!file) return;
+
       const reader = new FileReader();
-  
-      if (file.size > 1024 * 1024) {
-        // Ukuran gambar lebih dari 1MB
-        console.log("File size exceeds 1MB limit.");
-        return;
-      }
-  
       reader.onload = () => {
         const imageUrl = reader.result;
         const quillEditor = quill.current.editor;
         const range = quillEditor.getSelection();
         quillEditor.insertEmbed(range ? range.index : 0, "image", imageUrl);
       };
-  
       reader.readAsDataURL(file);
     };
   }, []);
-  
 
   const modules = useMemo(
     () => ({
@@ -63,12 +55,7 @@ const Editor = () => {
           [{ header: [2, 3, 4, false] }],
           ["bold", "italic", "underline", "blockquote"],
           [{ color: [] }],
-          [
-            { list: "ordered" },
-            { list: "bullet" },
-            { indent: "-1" },
-            { indent: "+1" },
-          ],
+          [{ list: "ordered" }, { list: "bullet" }, { indent: "-1" }, { indent: "+1" }],
           ["link", "image"],
           ["clean"],
         ],
@@ -84,19 +71,8 @@ const Editor = () => {
   );
 
   const formats = [
-    "header",
-    "bold",
-    "italic",
-    "underline",
-    "strike",
-    "blockquote",
-    "list",
-    "bullet",
-    "indent",
-    "link",
-    "image",
-    "color",
-    "clean",
+    "header", "bold", "italic", "underline", "strike", "blockquote", 
+    "list", "bullet", "indent", "link", "image", "color", "clean"
   ];
 
   return (
