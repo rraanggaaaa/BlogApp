@@ -63,7 +63,7 @@ const ChangePassword = () => {
                             <div>
                                 <div className="flex items-center justify-between">
                                     <label htmlFor="password" className="block text-sm font-medium leading-6 text-gray-900">
-                                        Password
+                                        New Password
                                     </label>
                                 </div>
                                 <div className="mt-2">
@@ -82,7 +82,7 @@ const ChangePassword = () => {
                             <div>
                                 <div className="flex items-center justify-between">
                                     <label htmlFor="password" className="block text-sm font-medium leading-6 text-gray-900">
-                                        New Password
+                                        Re-Type New Password
                                     </label>
                                 </div>
                                 <div className="mt-2">

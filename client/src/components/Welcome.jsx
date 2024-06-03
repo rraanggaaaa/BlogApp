@@ -5,8 +5,8 @@ import Maps from './pages/maps/Maps';
 import Footer from './pages/footer/Footer'
 
 const navigation = [
-    { name: 'Home', href: '/Home', current: false },
-    { name: 'Blog', href: '/Blog', current: false },
+    { name: 'Home', href: '/', current: false },
+    { name: 'Blog', href: '/BlogWelcome', current: false },
     { name: 'About', href: '/About', current: false },
 ]
 

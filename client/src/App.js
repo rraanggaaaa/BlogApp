@@ -12,12 +12,14 @@ import ChangePassword from "./components/pages/password/changePassword.jsx";
 import AdminDashboard from "./components/admin/Dashboard.jsx"; // Import the AdminDashboard component
 import AdminOverview from "./components/admin/Overview.jsx";
 import Articles from "./components/admin/Articles.jsx";
+import BlogWelcome from "./components/BlogWelcome.jsx";
 
 function App() {
   return (
     <BrowserRouter>
       <Routes>
         <Route exact path="/" element={<Welcome />} />
+        <Route exact path="/blogWelcome" element={<BlogWelcome />} />
         <Route exact path="/login" element={<Login />} />
         <Route path="/register" element={<Register />} />
         <Route path="/forgotPassword" element={<ForgotPassword />} />

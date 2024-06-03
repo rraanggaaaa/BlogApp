@@ -63,7 +63,7 @@ const ForgotPassword = () => {
                             <div>
                                 <div className="flex items-center justify-between">
                                     <label htmlFor="password" className="block text-sm font-medium leading-6 text-gray-900">
-                                        Password
+                                        New Password
                                     </label>
                                 </div>
                                 <div className="mt-2">
@@ -82,7 +82,7 @@ const ForgotPassword = () => {
                             <div>
                                 <div className="flex items-center justify-between">
                                     <label htmlFor="password" className="block text-sm font-medium leading-6 text-gray-900">
-                                        New Password
+                                        Re-Type New Password
                                     </label>
                                 </div>
                                 <div className="mt-2">
@@ -110,7 +110,7 @@ const ForgotPassword = () => {
 
                         <p className="mt-10 text-center text-sm text-gray-500">
                             Already have an account?{' '}
-                            <a href="/" className="font-semibold leading-6 text-indigo-600 hover:text-indigo-500">
+                            <a href="/Login" className="font-semibold leading-6 text-indigo-600 hover:text-indigo-500">
                                 Sign In
                             </a>
                         </p>
